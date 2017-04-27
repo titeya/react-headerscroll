@@ -241,10 +241,12 @@ export default class Headscroll extends Component {
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 1,
-      WebkitTransform: `translate3d(0, ${this.state.translateY, 0})`,
-      MsTransform: `translate3d(${0, this.state.translateY, 0})`,
-      transform: `translate3d(${0, this.state.translateY, 0})`,
+      zIndex: 2,
+      position: 'fixed',
+      transition: 'all 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+      WebkitTransform: `translate3d(0, ${this.state.translateY}; 0)`,
+      MsTransform: `translate3d(0, ${this.state.translateY}, 0)`,
+      transform: `translate3d(0 ${this.state.translateY}, 0)`,
     }
 
     let className = this.state.className
@@ -254,13 +256,13 @@ export default class Headscroll extends Component {
     // If we don't do this, the header will flash into view temporarily
     // while it transitions from 0 — -100%.
     if (this.state.state !== 'unfixed') {
-      innerStyle = {
-        ...innerStyle,
-        WebkitTransition: 'all .3s ease-in-out',
-        MozTransition: 'all .3s ease-in-out',
-        OTransition: 'all .3s ease-in-out',
-        transition: 'all .3s ease-in-out',
-      }
+      // innerStyle = {
+      //   ...innerStyle,
+      //   WebkitTransition: 'all .3s ease-in-out',
+      //   MozTransition: 'all .3s ease-in-out',
+      //   OTransition: 'all .3s ease-in-out',
+      //   transition: 'all .3s ease-in-out',
+      // }
       className += ' headscroll--scrolled'
     }
 
