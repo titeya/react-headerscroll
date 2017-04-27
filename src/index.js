@@ -244,7 +244,7 @@ export default class Headscroll extends Component {
       zIndex: 2,
       position: 'fixed',
       transition: 'all 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
-      WebkitTransform: `translate3d(0, ${this.state.translateY}; 0)`,
+      WebkitTransform: `translate3d(0, ${this.state.translateY}, 0)`,
       MsTransform: `translate3d(0, ${this.state.translateY}, 0)`,
       transform: `translate3d(0 ${this.state.translateY}, 0)`,
     }
