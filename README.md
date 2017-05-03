@@ -9,7 +9,12 @@ Hide your header on scroll
 Examples and documentation.
 
 ```html
-<Headscroll>
+<Headscroll
+  fixed={true}
+  offsettop={-64}
+  upTolerance={2}
+  downTolerance={2}
+>
   <header />
 </Headscroll>
 ```

@@ -21,12 +21,14 @@ export default class Headscroll extends Component {
     pinStart: PropTypes.number,
     style: PropTypes.object,
     offsettop: PropTypes.any.isRequired,
+    fixed: PropTypes.bool,
   };
 
   static defaultProps = {
     parent: () => window,
     disableInlineStyles: false,
     disable: false,
+    fixed:false,
     upTolerance: 5,
     downTolerance: 0,
     offsettop: '-100%',
@@ -77,6 +79,9 @@ export default class Headscroll extends Component {
     // If children have changed, remeasure height.
     if (prevProps.children !== this.props.children ) {
       this.setHeightOffset()
+    }
+    if (this.getDocumentHeight() < this.getViewportHeight()) {
+      this.pin()
     }
   }
 
@@ -233,21 +238,32 @@ export default class Headscroll extends Component {
     delete divProps.downTolerance
     delete divProps.pinStart
     delete divProps.offsettop
+    delete divProps.fixed
+
 
     const { style, wrapperStyle, ...rest } = divProps
 
     let innerStyle = {
-      position: this.props.disable || this.state.state === 'unfixed' ? 'relative' : 'fixed',
+      position: (this.props.fixed || (this.props.disable || this.state.state)) === 'unfixed' ? 'relative' : 'fixed',
       top: 0,
       left: 0,
       right: 0,
       zIndex: 2,
-      transition: 'all 0.4s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
       WebkitTransform: `translate3d(0, ${this.state.translateY}, 0)`,
       MsTransform: `translate3d(0, ${this.state.translateY}, 0)`,
       transform: `translate3d(0 ${this.state.translateY}, 0)`,
     }
+    if (this.props.fixed) {
+      innerStyle = {
+        ...innerStyle,
+        WebkitTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        MozTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        OTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        transition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+      }
+    }
 
+    console.log(innerStyle);
     let className = this.state.className
 
     // Don't add css transitions until after we've done the initial
@@ -255,13 +271,13 @@ export default class Headscroll extends Component {
     // If we don't do this, the header will flash into view temporarily
     // while it transitions from 0 — -100%.
     if (this.state.state !== 'unfixed') {
-      // innerStyle = {
-      //   ...innerStyle,
-      //   WebkitTransition: 'all .3s ease-in-out',
-      //   MozTransition: 'all .3s ease-in-out',
-      //   OTransition: 'all .3s ease-in-out',
-      //   transition: 'all .3s ease-in-out',
-      // }
+      innerStyle = {
+        ...innerStyle,
+        WebkitTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        MozTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        OTransition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+        transition: 'all 0.5s cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+      }
       className += ' headscroll--scrolled'
     }
 
