@@ -263,7 +263,6 @@ export default class Headscroll extends Component {
       }
     }
 
-    console.log(innerStyle);
     let className = this.state.className
 
     // Don't add css transitions until after we've done the initial
