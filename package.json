@@ -1,7 +1,7 @@
 {
   "name": "react-headscroll",
   "description": "Hide your header on scroll. react-headroom Fork",
-  "version": "2.1.10",
+  "version": "2.1.11",
   "author": "Nicolas Bellamy <n.bellamy@titeya.com>",
   "bugs": {
     "url": "https://github.com/titeya/react-headerscroll/issues"
