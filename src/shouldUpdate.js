@@ -8,6 +8,7 @@ export default function (
   const distanceScrolled = Math.abs(currentScrollY - lastKnownScrollY)
   const distanceOffsetTop = props.offsettop !== '-100%' ? props.offsettop : 0
 
+
   // We're disabled
   if (props.disable) {
     return {

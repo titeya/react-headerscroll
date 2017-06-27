@@ -14,6 +14,7 @@ Examples and documentation.
   offsettop={-64}
   upTolerance={2}
   downTolerance={2}
+  position="top"
 >
   <header />
 </Headscroll>

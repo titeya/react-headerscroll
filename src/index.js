@@ -22,7 +22,7 @@ export default class Headscroll extends Component {
     style: PropTypes.object,
     offsettop: PropTypes.any.isRequired,
     fixed: PropTypes.bool,
-    position: PropTypes.string,
+    direction: PropTypes.string,
   };
 
   static defaultProps = {
@@ -30,7 +30,7 @@ export default class Headscroll extends Component {
     disableInlineStyles: false,
     disable: false,
     fixed:false,
-    position:'top',
+    direction:'top',
     upTolerance: 5,
     downTolerance: 0,
     offsettop: '-100%',
@@ -241,6 +241,7 @@ export default class Headscroll extends Component {
     delete divProps.pinStart
     delete divProps.offsettop
     delete divProps.fixed
+    delete divProps.direction
 
 
     const { style, wrapperStyle, ...rest } = divProps
@@ -254,14 +255,16 @@ export default class Headscroll extends Component {
       MsTransform: `translate3d(0, ${this.state.translateY}, 0)`,
       transform: `translate3d(0 ${this.state.translateY}, 0)`,
     }
-    if (this.props.position === 'top') {
+    if (this.props.direction === 'top') {
       innerStyle = {
         ...innerStyle,
         top:0,
+      }
     } else {
       innerStyle = {
         ...innerStyle,
         bottom:0,
+      }
     }
     if (this.props.fixed) {
       innerStyle = {
